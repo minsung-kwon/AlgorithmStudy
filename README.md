@@ -11,52 +11,52 @@
 using namespace std;
 
 /**
-*애너그램인지 아닌지 판별하는 함수
-*애너그램이면 true, 아니면 false반환하는 함수
-*/
+ * 두 문자열이 애너그램인지 판별합니다.
+ *
+ * 애너그램이란, 문자를 재배열하여 다른 단어나 문장을 형성하는 것을 말합니다.
+ * 이 함수는 두 문자열이 애너그램 관계인지를 판별하여 결과를 반환합니다.
+ *
+ * @param str1 첫 번째 문자열입니다.
+ * @param str2 두 번째 문자열입니다.
+ * @return 두 문자열이 애너그램 관계라면 true, 아니라면 false를 반환합니다.
+ */
 bool JudgeAnagram(string str1, string str2) {
     if (str1.length() != str2.length())
         return false;
-    map<char, int> dict1; map<char, int> dict2;
-    //c++ STL의 map객체
-    //한번 들어간 char는 다시 들어가지 않고, 조정 불가능하다. int는 변환이 가능하다.
-    //char을 자동으로 정렬해준다.
+    
+    map<char, int> dict1; 
+    map<char, int> dict2;
+    // 각 문자열의 문자 빈도수를 저장하기 위해 map 사용.
+    // map은 key-value 쌍으로 이루어져 있으며, 여기서는 문자가 key, 빈도수가 value입니다.
+
     for (int i = 0; i < str1.length(); i++) {
-        if (dict1.find(str1[i]) != dict1.end())
-            dict1[str1[i]] += 1;
-        else
-            dict1[str1[i]] = 1;
+        dict1[str1[i]]++;  // 첫 번째 문자열의 문자 빈도수 증가
     }
     for (int i = 0; i < str2.length(); i++) {
-        if (dict2.find(str1[i]) != dict2.end())
-            dict2[str2[i]] += 1;
-        else
-            dict2[str2[i]] = 1;
+        dict2[str2[i]]++;  // 두 번째 문자열의 문자 빈도수 증가
     }
-    if (dict1 != dict2)
-        return false;
-    else
-        return true;
+
+    // 두 map 객체(dict1, dict2)가 동일한지 비교
+    return dict1 == dict2;
 }
 
-int main()
-{
+int main() {
     int N = 0;
     while (N < 1 || N >= 100)
         cin >> N;
+    
     string str_left[100];
     string str_right[100];
-    //string은 c++표준 라이브러리의 객체이다. 문자열의 입력/출력, char배열과 같이 각 인덱스에도 접근이 가능하다. 정확히는 객체이지만 그냥 자료형으로 생각하자.
-    //char배열의 경우 ==과 같은 연산자를 사용한 비교가 어렵고, strcmp()와 같은 함수를 사용하거나 반복문을 이용해서 각 인덱스별로 비교해야 한다. 
-    //하지만 string객체를 이용할 경우 일반적인 연산자만을 이용하여 모든 작업이 가능하다.
-    //좀 기능 적은 python string이라고 생각하면 된다.
+    // 사용자로부터 N쌍의 문자열을 입력받습니다.
+
     for (int i = 0; i < N; i++)
         cin >> str_left[i] >> str_right[i];
+
     for (int i = 0; i < N; i++) {
         bool ana_judge = JudgeAnagram(str_left[i], str_right[i]);
-        if (ana_judge == true)
+        if (ana_judge)
             cout << str_left[i] << " & " << str_right[i] << " are anagrams." << endl;
-        else if (ana_judge == false)
+        else
             cout << str_left[i] << " & " << str_right[i] << " are NOT anagrams." << endl;
     }
     return 0;
