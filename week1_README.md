@@ -1,4 +1,4 @@
-### AlgorithmStudy
+### AlgorithmStudy_Week1
 
 #### 소스코드
 - main.cpp:
