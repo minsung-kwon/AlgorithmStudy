@@ -1,6 +1,6 @@
 ## 빅오(big-O)표기법, 빈도수 세기
 
-#### 소스코드
+#### 애너그램램
 - main.cpp:
 
 ```cpp
@@ -60,5 +60,42 @@ int main() {
             cout << str_left[i] << " & " << str_right[i] << " are NOT anagrams." << endl;
     }
     return 0;
+}
+```
+
+#### 비밀지도
+- solution.cpp:
+
+```cpp
+#include <string>
+#include <vector>
+
+using namespace std;
+
+// 지도의 크기 n과 두 개의 정수 배열 arr1, arr2를 받아서 최종 지도를 문자열 배열로 반환하는 함수
+vector<string> solution(int n, vector<int> arr1, vector<int> arr2) {
+    vector<string> answer; // 최종 지도를 문자열로 저장할 벡터
+    vector<int> sol; // arr1과 arr2의 각 원소를 OR 연산한 결과를 저장할 벡터
+    
+    // arr1과 arr2의 각 원소를 OR 연산하여 sol 벡터에 저장
+	for (int i = 0; i < n; i++) {
+		sol.push_back(arr1[i] | arr2[i]);
+	}
+
+    // sol 벡터의 각 원소를 이진수로 변환하여 지도를 생성
+	for (int i = 0; i < n; i++) {
+		string row = ""; // 한 줄의 지도를 나타낼 문자열
+		for (int j = n; j > 0; j--) {
+		    // sol[i]의 j번째 비트가 1인 경우 '#'을, 0인 경우 ' '을 row에 추가
+			if ((sol[i] & (1 << (j-1))) != 0) {
+				row+='#';
+			}
+			else if ((sol[i] & (1 << (j-1))) == 0) {
+				row+=' ';
+			}
+		}
+		answer.push_back(row); // 완성된 한 줄의 지도를 answer 벡터에 추가
+	}
+    return answer; // 최종 지도를 담은 answer 벡터 반환
 }
 ```
