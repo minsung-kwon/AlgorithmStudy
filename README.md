@@ -1,6 +1,6 @@
 ## 슬라이딩 윈도우, 투 포인터
 
-#### 슬라이딩 윈도우-[BOJ 21921 - 블로그](https://www.acmicpc.net/problem/21921)
+#### 슬라이딩 윈도우 | [BOJ 21921-블로그](https://www.acmicpc.net/problem/21921)
 
 - main.cpp
 
