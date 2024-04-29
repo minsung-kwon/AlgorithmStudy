@@ -59,3 +59,150 @@ int main() {
 }
 ```
 
+#### 투 포인터 | [BOJ 2003-수들의 합 2](https://www.acmicpc.net/problem/2003)
+
+- main.cpp
+
+```cpp
+#include <iostream>
+#include <map>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <list>
+#include <stack>
+#include <queue>
+
+
+using namespace std;
+
+
+/**
+* 
+*/
+
+
+
+int main()
+{
+	int start = 0, end = 0; //투 포인터 사용을 위한 변수, 처음에는 모두 0번째 index로 초기화
+	int* arr; //수열을 담을 배열
+	int num, N; //만들어야 하는 숫자, 수열에 있는 원소의 수
+	int res = 0; //경우의 수의 합
+	cin >> N >> num;
+	arr = (int*)calloc(N , sizeof(int));
+	for (int i = 0; i < N; i++) {
+		cin >> arr[i];
+	}
+	int sum = arr[0]; //투 포인터 사용하면서 계산된 합을 저장
+	while (true) {
+		if (sum == num) {
+			res++;
+		}
+
+		if (N - 1 <= start) {
+			cout << res;
+			break;
+		}
+		
+		if (sum < num && N-1 > end) {
+			end++;
+			sum += arr[end];
+		}
+		else if (sum >= num) {
+			sum -= arr[start];
+			start++;
+			if (start > end) {
+				end++;
+				sum += arr[end];
+			}
+		}
+		else {
+			sum -= arr[start];
+			start++;
+		}
+	}
+	return 0;
+}
+```
+
+#### 투 포인터 | [BOJ 1644-소수의 연속합](https://www.acmicpc.net/problem/1644)
+
+- main.cpp
+
+```cpp
+#include <iostream>
+#include <map>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <list>
+#include <stack>
+#include <queue>
+
+
+using namespace std;
+
+
+/**
+* 
+*/
+
+
+
+int main()
+{
+	int num, res = 0;
+	cin >> num;
+	if (num == 1) {
+		cout << 0;
+		return 0;
+	}
+
+	vector<int> prime_num; //소수들을 저장해둘 벡터
+	vector<bool> v(num + 1, true);
+	v.at(0) = false; v.at(1) = false;
+	for (int i = 0; i < num + 1; i++) {
+		if (v.at(i)) {
+			prime_num.push_back(i);
+			for (int k = i; k <= num; k += i) {
+				v.at(k) = false;
+			}
+		}
+	}
+
+	
+	int max = prime_num.size();
+
+	int sum = prime_num.at(0); //투 포인터 쓸 때 값 저장해줄 변수
+	int start = 0, end = 0;
+	while (true) {
+		if (sum == num) {
+			res++;
+		}
+
+		if (max - 1 <= start) {
+			cout << res;
+			break;
+		}
+
+		if (sum < num && max - 1 > end) {
+			end++;
+			sum += prime_num[end];
+		}
+		else if (sum >= num) {
+			sum -= prime_num[start];
+			start++;
+			if (start > end) {
+				end++;
+				sum += prime_num[end];
+			}
+		}
+		else {
+			sum -= prime_num[start];
+			start++;
+		}
+	}
+	return 0;
+}
+```
