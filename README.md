@@ -1,3 +1,34 @@
-## AlgorithmStudy
+## 재귀_기본
 
-### 스터디의 주제별 소스코드와 설명(주석) 을 보시려면 각 주제별 branch를 열어주세요
+#### 1부터 100만까지의 합
+
+```cpp
+#include <iostream>
+#include <map>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <list>
+#include <stack>
+#include <queue>
+
+using namespace std;
+
+/**
+* 재귀함수의 depth가 너무 클 경우 작동하지 않는다
+*/
+
+unsigned long long plusnum(unsigned long long num) {
+	if (num == 1) {
+		return num;
+	}
+	return (num + plusnum(num-1));
+}
+
+int main()
+{
+	unsigned long long res = plusnum(1000);
+	cout << res;
+	return 0;
+}
+```
