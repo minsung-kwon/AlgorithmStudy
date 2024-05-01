@@ -67,7 +67,7 @@ int main()
 }
 ```
 
-### [백준-재귀](https://www.acmicpc.net/step/19)
+### [재귀-백준](https://www.acmicpc.net/step/19)
 
 #### [BOJ 11279 - 하노이 탑 이동 순서](https://www.acmicpc.net/problem/11729)
 
